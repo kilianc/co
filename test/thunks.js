@@ -192,25 +192,17 @@ describe('co(fn)', function(){
 
   describe('when yielding neither a function nor a promise', function(){
     it('should throw', function(done){
-      var errors = [];
+      var error
 
       co(function *(){
         try {
           var a = yield 'something';
         } catch (err) {
-          errors.push(err.message);
+          error = err.message;
         }
 
-        try {
-          var a = yield 'something';
-        } catch (err) {
-          errors.push(err.message);
-        }
-
-        errors.length.should.equal(2);
         var msg = 'yield a function, promise, generator, array, or object';
-        errors[0].should.include(msg);
-        errors[1].should.include(msg);
+        error.should.include(msg);
       })(done);
     })
   })

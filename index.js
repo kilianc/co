@@ -103,8 +103,11 @@ function co(fn) {
       }
 
       // invalid
-      next(new TypeError('You may only yield a function, promise, generator, array, or object, '
-        + 'but the following was passed: "' + String(ret.value) + '"'));
+      err = new TypeError('You may only yield a function, promise, generator, array, or object, '
+        + 'but the following was passed: "' + String(ret.value) + '"')
+
+      gen.throw(err);
+      exit();
     }
   }
 }
